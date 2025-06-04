@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Typing Test</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f9fafb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 700px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    #sentence {
+      font-size: 1.2rem;
+      background: #f3f4f6;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      padding: 10px;
+      font-size: 1rem;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      resize: none;
+      outline: none;
+    }
+
+    #results {
+      margin-top: 20px;
+      font-size: 1.1rem;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1e40af;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Typing Speed Test</h1>
+    <div id="sentence"></div>
+    <textarea id="input" placeholder="Start typing here..."></textarea>
+    <div id="results"></div>
+    <button onclick="startTest()">Restart Test</button>
+  </div>
+
+  <script>
+    const sentences = [
+      "The quick brown fox jumps over the lazy dog.",
+      "Typing fast and accurately takes a lot of practice.",
+      "This is a simple test to measure your typing speed.",
+      "Javascript allows us to create interactive web apps.",
+      "Every day is a good day to improve your skills."
+    ];
+
+    let startTime;
+    let currentSentence = "";
+    const sentenceDisplay = document.getElementById("sentence");
+    const input = document.getElementById("input");
+    const results = document.getElementById("results");
+
+    function startTest() {
+      currentSentence = sentences[Math.floor(Math.random() * sentences.length)];
+      sentenceDisplay.textContent = currentSentence;
+      input.value = "";
+      input.disabled = false;
+      results.textContent = "";
+      input.focus();
+      startTime = null;
+    }
+
+    input.addEventListener("input", () => {
+      if (!startTime) startTime = new Date();
+
+      const typedText = input.value;
+      const elapsedTime = (new Date() - startTime) / 1000 / 60; // in minutes
+
+      if (typedText === currentSentence) {
+        input.disabled = true;
+
+        const wordCount = currentSentence.split(" ").length;
+        const wpm = Math.round(wordCount / elapsedTime);
+
+        const typedWords = typedText.split(" ");
+        const originalWords = currentSentence.split(" ");
+        let correct = 0;
+        for (let i = 0; i < typedWords.length; i++) {
+          if (typedWords[i] === originalWords[i]) correct++;
+        }
+        const accuracy = Math.round((correct / originalWords.length) * 100);
+
+        results.innerHTML = `
+          <p>✅ Test Complete!</p>
+          <p>Words per minute: <strong>${wpm}</strong></p>
+          <p>Accuracy: <strong>${accuracy}%</strong></p>
+        `;
+      }
+    });
+
+    window.onload = startTest;
+  </script>
+
+</body>
+</html>
