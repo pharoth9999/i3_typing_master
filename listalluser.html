@@ -3,9 +3,217 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>All Users</title>
+    <style>
+      /* Internal CSS for the list users page */
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f4f7f6; /* Light greenish gray background */
+        color: #333;
+        margin: 0;
+        padding: 20px;
+      }
+
+      .container {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        max-width: 900px;
+        margin: 20px auto;
+      }
+
+      h1 {
+        color: #2a7c64; /* Dark green */
+        text-align: center;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #e0e0e0;
+        padding-bottom: 15px;
+      }
+
+      .user-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      .user-table th,
+      .user-table td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+      }
+
+      .user-table th {
+        background-color: #e8f3f0; /* Light green background for headers */
+        color: #2a7c64; /* Dark green text for headers */
+        font-weight: bold;
+      }
+
+      .user-table tr:nth-child(even) {
+        background-color: #f9f9f9; /* Zebra striping for rows */
+      }
+
+      .user-table tr:hover {
+        background-color: #f1f1f1; /* Highlight on hover */
+      }
+
+      .actions a {
+        color: #1877f2; /* Blue for action links */
+        text-decoration: none;
+        margin-right: 10px;
+      }
+
+      .actions a:hover {
+        text-decoration: underline;
+      }
+
+      .actions a.delete {
+        color: #e74c3c; /* Red for delete action */
+      }
+
+      .add-user-link {
+        display: inline-block;
+        margin-bottom: 20px;
+        padding: 10px 15px;
+        background-color: #2a7c64; /* Dark green */
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+      }
+
+      .add-user-link:hover {
+        background-color: #216350; /* Darker green on hover */
+      }
+
+      footer {
+        text-align: center;
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid #e0e0e0;
+        font-size: 0.9em;
+        color: #777;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .container {
+          padding: 20px;
+        }
+        h1 {
+          font-size: 24px;
+        }
+        .user-table,
+        .user-table th,
+        .user-table td {
+          font-size: 14px;
+        }
+        .user-table th,
+        .user-table td {
+          padding: 8px;
+        }
+        .add-user-link {
+          display: block;
+          text-align: center;
+          margin-bottom: 15px;
+        }
+      }
+      @media (max-width: 480px) {
+        .user-table {
+          display: block;
+          overflow-x: auto; /* Allows table to scroll horizontally on small screens */
+        }
+        .user-table th,
+        .user-table td {
+          white-space: nowrap; /* Prevents text wrapping in cells */
+        }
+      }
+    </style>
   </head>
   <body>
-    <h2>This is the list of user page</h2>
+    <div class="container">
+      <h1>User Management</h1>
+
+      <a href="#" class="add-user-link">Add New User</a>
+
+      <table class="user-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Joined Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Sample User Data Row 1 -->
+          <tr>
+            <td>1</td>
+            <td>Alice Wonderland</td>
+            <td>alice@example.com</td>
+            <td>Administrator</td>
+            <td>2023-01-15</td>
+            <td class="actions">
+              <a href="#">Edit</a>
+              <a href="#" class="delete">Delete</a>
+            </td>
+          </tr>
+          <!-- Sample User Data Row 2 -->
+          <tr>
+            <td>2</td>
+            <td>Bob The Builder</td>
+            <td>bob@example.com</td>
+            <td>Editor</td>
+            <td>2023-02-20</td>
+            <td class="actions">
+              <a href="#">Edit</a>
+              <a href="#" class="delete">Delete</a>
+            </td>
+          </tr>
+          <!-- Sample User Data Row 3 -->
+          <tr>
+            <td>3</td>
+            <td>Charlie Brown</td>
+            <td>charlie@example.com</td>
+            <td>Viewer</td>
+            <td>2023-03-10</td>
+            <td class="actions">
+              <a href="#">Edit</a>
+              <a href="#" class="delete">Delete</a>
+            </td>
+          </tr>
+          <!-- Sample User Data Row 4 -->
+          <tr>
+            <td>4</td>
+            <td>Diana Prince</td>
+            <td>diana@example.com</td>
+            <td>Editor</td>
+            <td>2023-04-05</td>
+            <td class="actions">
+              <a href="#">Edit</a>
+              <a href="#" class="delete">Delete</a>
+            </td>
+          </tr>
+          <!-- Add more user rows here as needed -->
+        </tbody>
+      </table>
+    </div>
+
+    <footer>
+      <p>
+        &copy; <span id="currentYear"></span> Your Company Name. All rights
+        reserved.
+      </p>
+    </footer>
+
+    <script>
+      // Script to set the current year in the footer
+      document.getElementById("currentYear").textContent =
+        new Date().getFullYear();
+    </script>
   </body>
 </html>
